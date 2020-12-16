@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net472</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\JobTrackingApp.DataAccess\JobTrackingApp.DataAccess.csproj" />
+      <ProjectReference Include="..\JobTrackingApp.Entities\JobTrackingApp.Entities.csproj" />
+    </ItemGroup>
+
+</Project>
