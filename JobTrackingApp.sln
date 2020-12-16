@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobTrackingApp.DataAccess",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobTrackingApp.Entities", "JobTrackingApp.Entities\JobTrackingApp.Entities.csproj", "{8F67C227-FCC8-4764-951C-B879936A8C15}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobTrackingApp.WebUI", "JobTrackingApp.WebUI\JobTrackingApp.WebUI.csproj", "{7CCDF90B-10A5-41F7-AF29-76F312739CB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{8F67C227-FCC8-4764-951C-B879936A8C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F67C227-FCC8-4764-951C-B879936A8C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F67C227-FCC8-4764-951C-B879936A8C15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CCDF90B-10A5-41F7-AF29-76F312739CB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CCDF90B-10A5-41F7-AF29-76F312739CB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CCDF90B-10A5-41F7-AF29-76F312739CB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CCDF90B-10A5-41F7-AF29-76F312739CB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

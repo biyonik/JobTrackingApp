@@ -1,9 +1,9 @@
-using JobTrackingApp.Entities.Concrete;
+﻿using JobTrackingApp.Entities.Concrete;
 using JobTrackingSystem.BusinessLogic.Interfaces;
 
 namespace JobTrackingApp.BusinessLogic.Interfaces
 {
-    public interface IUserService: IGenericService<User>
+    public interface IReportService: IGenericService<Report>
     {
         
     }

@@ -5,36 +5,36 @@ using JobTrackingApp.Entities.Concrete;
 
 namespace JobTrackingApp.BusinessLogic.Concrete
 {
-    public class UserManager: IUserService
+    public class TaskManager: ITaskService
     {
-        private readonly EfUserRepository _efUserRepository;
+        private readonly EfTaskRepository _efUserRepository;
 
-        public UserManager()
+        public TaskManager()
         {
-            _efUserRepository = new EfUserRepository();
+            _efUserRepository = new EfTaskRepository();
         }
         
-        public void Add(User entity)
+        public void Add(Task entity)
         {
             _efUserRepository.Add(entity);
         }
 
-        public void Delete(User entity)
+        public void Delete(Task entity)
         {
             _efUserRepository.Delete(entity);
         }
 
-        public void Update(User entity)
+        public void Update(Task entity)
         {
             _efUserRepository.Update(entity);
         }
 
-        public User Get(int Id)
+        public Task Get(int Id)
         {
             return _efUserRepository.Get(Id);
         }
 
-        public List<User> GetAll()
+        public List<Task> GetAll()
         {
             return _efUserRepository.GetAll();
         }
