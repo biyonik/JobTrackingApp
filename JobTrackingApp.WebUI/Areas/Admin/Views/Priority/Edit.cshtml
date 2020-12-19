@@ -1,0 +1,22 @@
+﻿@model PriorityEditViewModel
+@{
+    ViewBag.Title = "Aciliyet Düzenle";
+    Layout = "_AdminLayout";
+}
+
+<h4 class="my-2">Aciliyet İşlemleri - <strong>@Model.Level</strong> Aciliyet Tanımını Düzenliyorsunuz</h4>
+<hr>
+<form class="w-75 mx-auto p-3" method="post" asp-controller="Priority" asp-action="Edit">
+    <input type="hidden" asp-for="Id">
+    <div class="form-group">
+        <label asp-for="Level" class="col-form-label"></label>
+        <input asp-for="Level" class="form-control"/>
+        <span asp-validation-for="Level" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-sm btn-primary">Değişiklikleri Kaydet</button>
+</form>
+
+@section Scripts {
+    <script src="~/node_modules/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+}

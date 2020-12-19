@@ -1,0 +1,93 @@
+﻿@model List<TaskListViewModel>
+@{
+    ViewBag.Title = "Job Tracking App";
+    Layout = "_AdminLayout";
+}
+
+<h2>Görev İşlemleri</h2>
+<hr>
+<a asp-action="Add" asp-controller="Task" class="btn btn-sm btn-outline-secondary my-2">Yeni Görev Ekle</a>
+@if (Model.Count > 0)
+{
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Adı</th>
+            <th>Aciliyet Derecesi</th>
+            <th>Oluşturulma Tarihi</th>
+            <th>İşlemler</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (TaskListViewModel task in Model)
+        {
+            <tr>
+                <td>@task.Id</td>
+                <td>@task.Name</td>
+                <td>@task.Priority.Level</td>
+                <td>@task.CreatedDate.ToString("D")</td>
+                <td>
+                    <a href="#" class="btn btn-sm btn-success">Detay</a>
+                    <a asp-action="Edit" asp-controller="Task" asp-route-id="@task.Id" class="btn btn-sm btn-warning">Düzenle</a>
+                    <a href="#" data-toggle="modal" data-target="#taskDeleteModal" data-task-id="@task.Id" class="btn btn-sm btn-danger">Sil</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">Bu modül için herhangi bir kayıt bulunamadı!</div>
+}
+
+<!-- Task Delete Modal -->
+<div class="modal fade" id="taskDeleteModal" tabindex="-1" aria-labelledby="taskDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="taskDeleteModalLabel">Görev Sil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bu görevi silmek istediğinize emin misiniz?
+            </div>
+            <div class="modal-footer">
+                <button id="taskDeleteConfirmButton" type="button" class="btn btn-danger">Onayla</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{ 
+    <script>
+        $(document).ready(function() {
+            $('#taskDeleteModal').on('show.bs.modal', function(event) {
+                const modalOpenLinkElement = event.relatedTarget;
+                const task_id = modalOpenLinkElement.dataset.taskId;
+
+                $('#taskDeleteConfirmButton').on('click', function(e) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: '/Admin/Task/Delete',
+                        dataType: 'JSON',
+                        data: {
+                            id: task_id
+                        },
+                        success: function(response) {
+                            window.location.reload();
+                        },
+                        error: function(error) {
+                            console.log(error.statusText);
+                        }
+                    })
+                });
+            });
+        });
+    </script>
+}

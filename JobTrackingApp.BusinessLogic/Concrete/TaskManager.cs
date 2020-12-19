@@ -1,42 +1,48 @@
 using System.Collections.Generic;
 using JobTrackingApp.BusinessLogic.Interfaces;
 using JobTrackingApp.DataAccess.Concrete.EfCore.Repositories;
+using JobTrackingApp.DataAccess.Interfaces;
 using JobTrackingApp.Entities.Concrete;
 
 namespace JobTrackingApp.BusinessLogic.Concrete
 {
     public class TaskManager: ITaskService
     {
-        private readonly EfTaskRepository _efUserRepository;
+        private readonly ITaskDAL _taskDal;
 
-        public TaskManager()
+        public TaskManager(ITaskDAL taskDal)
         {
-            _efUserRepository = new EfTaskRepository();
+            _taskDal = taskDal;
         }
         
         public void Add(Task entity)
         {
-            _efUserRepository.Add(entity);
+            _taskDal.Add(entity);
         }
 
         public void Delete(Task entity)
         {
-            _efUserRepository.Delete(entity);
+            _taskDal.Delete(entity);
         }
 
         public void Update(Task entity)
         {
-            _efUserRepository.Update(entity);
+            _taskDal.Update(entity);
         }
 
         public Task Get(int Id)
         {
-            return _efUserRepository.Get(Id);
+            return _taskDal.Get(Id);
         }
 
         public List<Task> GetAll()
         {
-            return _efUserRepository.GetAll();
+            return _taskDal.GetAll();
+        }
+
+        public List<Task> GetAllIncompleteTasksWithPriority()
+        {
+            return _taskDal.GetAllIncompleteTasksWithPriority();
         }
     }
 }

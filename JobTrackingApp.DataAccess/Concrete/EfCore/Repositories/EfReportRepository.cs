@@ -4,7 +4,7 @@ using JobTrackingApp.Entities.Concrete;
 
 namespace JobTrackingApp.DataAccess.Concrete.EfCore.Repositories
 {
-    public class EfReportRepository: EfGenericRepository<Report, JobTrackingContext>
+    public class EfReportRepository: EfGenericRepository<Report, JobTrackingContext>, IReportDAL
     {
         
     }

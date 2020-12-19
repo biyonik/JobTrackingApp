@@ -2,7 +2,9 @@
 
 @{
     ViewBag.Title = "Anasayfa";
-    Layout = "_Layout";
+    Layout = "_StandartLayout";
 }
 
 <h2>Anasayfa</h2>
+<a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-sm btn-outline-danger">Admin</a>
+<a asp-area="Member" asp-controller="Home" asp-action="Index" class="btn btn-sm btn-outline-info">Member</a>

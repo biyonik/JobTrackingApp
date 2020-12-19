@@ -1,0 +1,44 @@
+﻿@model TaskEditViewModel
+@{
+    ViewBag.Title = "Job Tracking App";
+    Layout = "_AdminLayout";
+}
+
+<h4 class="my-2">Görev İşlemleri - <strong>@Model.Name</strong> Görevini Düzenliyorsunuz</h4>
+<hr>
+<form class="w-75 mx-auto p-3" method="post" asp-controller="Task" asp-action="Edit">
+    <input type="hidden" asp-for="Id">
+    <div class="form-group">
+        <label asp-for="Name" class="col-form-label"></label>
+        <input asp-for="Name" class="form-control"/>
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description" class="col-form-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PriorityId" class="col-form-label"></label>
+        <select asp-for="PriorityId" class="form-control" asp-items="@Model.PriorityList">
+            <option value="-1" hidden="hidden">Seçiniz</option>
+        </select>
+        <span asp-validation-for="PriorityId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Status" class="col-form-label"></label>
+        <select asp-for="Status" class="form-control" asp-items="@Model.StatusList">
+            
+        </select>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-sm btn-primary">Değişiklikleri Kaydet</button>
+</form>
+
+@section Scripts {
+    <script src="~/node_modules/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+}

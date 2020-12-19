@@ -1,42 +1,43 @@
 ﻿using System.Collections.Generic;
 using JobTrackingApp.BusinessLogic.Interfaces;
 using JobTrackingApp.DataAccess.Concrete.EfCore.Repositories;
+using JobTrackingApp.DataAccess.Interfaces;
 using JobTrackingApp.Entities.Concrete;
 
 namespace JobTrackingApp.BusinessLogic.Concrete
 {
     public class ReportManager: IReportService
     {
-        private readonly EfReportRepository _efReportRepository;
+        private readonly IReportDAL _reportDal;
 
-        public ReportManager(EfReportRepository efReportRepository)
+        public ReportManager(IReportDAL reportDal)
         {
-            _efReportRepository = efReportRepository;
+            _reportDal = reportDal;
         }
         
         public void Add(Report entity)
         {
-            _efReportRepository.Add(entity);
+            _reportDal.Add(entity);
         }
 
         public void Delete(Report entity)
         {
-            _efReportRepository.Delete(entity);
+            _reportDal.Delete(entity);
         }
 
         public void Update(Report entity)
         {
-            _efReportRepository.Update(entity);
+            _reportDal.Update(entity);
         }
 
         public Report Get(int Id)
         {
-            return _efReportRepository.Get(Id);
+            return _reportDal.Get(Id);
         }
 
         public List<Report> GetAll()
         {
-            return _efReportRepository.GetAll();
+            return _reportDal.GetAll();
         }
     }
 }

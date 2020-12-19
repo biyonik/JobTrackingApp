@@ -5,6 +5,6 @@ namespace JobTrackingApp.DataAccess.Interfaces
 {
     public interface ITaskDAL: IGenericDAL<Task>
     {
-
+        List<Task> GetAllIncompleteTasksWithPriority();
     }
 }

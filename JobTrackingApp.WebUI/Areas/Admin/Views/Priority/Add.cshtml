@@ -1,0 +1,20 @@
+﻿@model PriorityAddViewModel
+@{
+    ViewBag.Title = "title";
+    Layout = "_AdminLayout";
+}
+
+<h4 class="my-2">Aciliyet İşlemleri - Yeni Aciliyet Ekle</h4>
+<hr>
+<form class="w-75 mx-auto p-3" method="post" asp-controller="Priority" asp-action="Add">
+    <div class="form-group">
+        <label asp-for="Level" class="col-form-label"></label>
+        <input asp-for="Level" class="form-control"/>
+        <span asp-validation-for="Level" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-sm btn-primary">Kaydet</button>
+</form>
+@section Scripts {
+    <script src="~/node_modules/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+}
