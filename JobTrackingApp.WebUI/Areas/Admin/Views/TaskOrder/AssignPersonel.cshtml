@@ -1,0 +1,103 @@
+﻿@model TaskListWithUsersViewModel
+
+@{
+    ViewBag.Title = "Job Tracking App";
+    Layout = "_AdminLayout";
+}
+
+<h2>Personele Görev Ata</h2>
+<hr>
+<div class="row">
+    <div class="col-md-12 mb-2">
+        @if (!string.IsNullOrWhiteSpace(Model.searchParam))
+        {
+            <div class="border border-dark p-3 my-2">
+                <strong>@Model.searchParam</strong> kelimesi için sonuçlar görüntüleniyor
+                <a asp-action="AssignPersonel" asp-controller="TaskOrder" asp-route-id="@Model.TaskListViewModel.Id" class="float-right">Filtreyi Kaldır</a>
+            </div>
+        }
+        <form method="get" asp-action="AssignPersonel" asp-controller="TaskOrder" class="text-right">
+            <input type="text" name="searchParam" class="form-control-sm border border-top-0 border-left-0 border-right-0 border-primary" placeholder="Bir kullanıcı arayın">
+            <input type="submit" value="Ara" class="btn btn-sm btn-outline-primary">
+        </form>
+    </div>
+    <div class="col-md-4 mt-2">
+        <div class="card border border-primary">
+            <div class="card-header bg-primary">
+                <h4 class="text-center text-white lead">Görev Bilgileri</h4>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@Model.TaskListViewModel.Name</h5>
+                <p class="card-text">@Model.TaskListViewModel.Description</p>
+            </div>
+            <div class="card-footer">
+                <p class="card-text">
+                    <strong>Aciliyet Durumu: </strong><span class="badge badge-primary">@Model.TaskListViewModel.Priority.Level</span>
+                </p>
+                <p class="card-text">
+                    <strong>Durumu: </strong><span class="badge badge-@(Model.TaskListViewModel.Status == true ? "success" : "danger")">@(Model.TaskListViewModel.Status == true ? "Aktif" : "Pasif")</span>
+                </p>
+                <p class="card-text">
+                    <strong>Oluşturulma Tarihi: </strong><span>@Model.TaskListViewModel.CreatedDate.ToString("d")</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 mt-2">
+        @foreach (AppUserListViewModel appUserListViewModel in Model.Users)
+        {
+            <div class="card mb-3 border border-primary">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="~/images/@appUserListViewModel.Picture" class="card-img" alt="@($"{appUserListViewModel.FirstName} {appUserListViewModel.SurName}")">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">@($"{appUserListViewModel.FirstName} {appUserListViewModel.SurName}")</h5>
+                            <p class="card-text">Bir projede çalışyor mu?</p>
+                            <p class="card-text">
+                                <small class="text-muted">@appUserListViewModel.Email</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <nav aria-label="Personel Listesi">
+            <ul class="pagination">
+                @if (!string.IsNullOrWhiteSpace(Model.searchParam))
+                {
+                    @for (int i = 1; i <= Model.totalPageCount; i++)
+                    {
+                        <li class="page-item @(Model.activePage == i ? " active" : null)">
+                            <a class="page-link"
+                               asp-action="AssignPersonel"
+                               asp-controller="TaskOrder"
+                               asp-route-id="@Model.TaskListViewModel.Id"
+                               asp-route-searchParam="@Model.searchParam"
+                               asp-route-activePage="@i">
+                                @i
+                            </a>
+                        </li>
+                    }
+                }
+                else
+                {
+                    @for (int i = 1; i <= Model.totalPageCount; i++)
+                    {
+                        <li class="page-item @(Model.activePage == i ? " active" : null)">
+                            <a class="page-link"
+                               asp-action="AssignPersonel"
+                               asp-controller="TaskOrder"
+                               asp-route-id="@Model.TaskListViewModel.Id"
+                               asp-route-activePage="@i">
+                                @i
+                            </a>
+                        </li>
+                    }
+                }
+                
+            </ul>
+        </nav>
+    </div>
+</div>
