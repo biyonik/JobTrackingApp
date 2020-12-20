@@ -1,11 +1,39 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <title>@ViewData["Title"]</title>
+    <!-- Bootstrap core CSS -->
+    @* <link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet"> *@
+    <link href="~/node_modules/theme/united/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/node_modules/theme/simple-sidebar.css" rel="stylesheet">
+    @await RenderSectionAsync("Styles", false)
 </head>
 <body>
 
-@RenderBody()
-
+<div class="d-flex" id="wrapper">
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+<!-- /#page-content-wrapper -->
+<!-- Bootstrap core JavaScript -->
+<script src="~/node_modules/jquery/dist/jquery.js"></script>
+<script src="~/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+<script src="~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+@await RenderSectionAsync("Scripts", false)
 </body>
 </html>

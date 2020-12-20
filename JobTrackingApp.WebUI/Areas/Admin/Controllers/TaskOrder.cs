@@ -5,12 +5,12 @@ namespace JobTrackingApp.WebUI.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    public class HomeController : Controller
+    public class TaskOrder : Controller
     {
         // GET
         public IActionResult Index()
         {
-            TempData["Active"] = "Home";
+            TempData["Active"] = "TaskOrder";
             return View();
         }
     }

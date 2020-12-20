@@ -29,7 +29,7 @@
             <a asp-action="Index" asp-controller="Home" class="list-group-item list-group-item-action @(active == "Home" ? "active" : null)">Anasayfa</a>
             <a asp-action="Index" asp-controller="Task" class="list-group-item list-group-item-action @(active == "Task" ? "active" : null)">Görev İşlemleri</a>
             <a asp-action="Index" asp-controller="Priority" class="list-group-item list-group-item-action @(active == "Priority" ? "active" : null)">Aciliyet İşlemleri</a>
-            <a href="#" class="list-group-item list-group-item-action">Events</a>
+            <a asp-action="Index" asp-controller="TaskOrder" class="list-group-item list-group-item-action @(active == "TaskOrder" ? "active" : null)">İş İşlemleri</a>
             <a href="#" class="list-group-item list-group-item-action">Profile</a>
             <a href="#" class="list-group-item list-group-item-action">Status</a>
         </div>

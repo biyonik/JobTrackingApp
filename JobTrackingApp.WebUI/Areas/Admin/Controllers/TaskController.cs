@@ -2,11 +2,13 @@
 using JobTrackingApp.BusinessLogic.Interfaces;
 using JobTrackingApp.Entities.Concrete;
 using JobTrackingApp.WebUI.Areas.Admin.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace JobTrackingApp.WebUI.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class TaskController : Controller
     {

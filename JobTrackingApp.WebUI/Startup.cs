@@ -5,17 +5,18 @@ using JobTrackingApp.DataAccess.Concrete.EfCore.Repositories;
 using JobTrackingApp.DataAccess.Interfaces;
 using JobTrackingApp.Entities.Concrete;
 using JobTrackingApp.WebUI.Middlewares;
+using JobTrackingApp.WebUI.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using static JobTrackingApp.WebUI.IdentityInitializer;
 
 namespace JobTrackingApp.WebUI
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ITaskService, TaskManager>();
@@ -27,14 +28,14 @@ namespace JobTrackingApp.WebUI
             services.AddScoped<IReportDAL, EfReportRepository>();
             
             services.AddDbContext<JobTrackingContext>();
-            services.AddIdentity<AppUser, AppRole>()
+            services.AddIdentity<AppUser, AppRole>(CustomIdentityOptions.GetIdentityOptions())
                     .AddEntityFrameworkStores<JobTrackingContext>();
-            
+
+            services.ConfigureApplicationCookie(CustomCookieAuthenticationOptions.GetCookieAuthOptions());
             services.AddControllersWithViews();
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -42,6 +43,9 @@ namespace JobTrackingApp.WebUI
             }
 
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            SeedData(userManager, roleManager).Wait();
             app.UseDefaultFiles();
             app.UseStaticFiles(CustomStaticFileOptions.GetFileOptions(app, env, "node_modules"));
             app.UseEndpoints(endpoints =>
