@@ -18,9 +18,9 @@ namespace JobTrackingApp.BusinessLogic.Concrete
             return _appUserDal.GetNonAdminUsers();
         }
 
-        public List<AppUser> GetNonAdminUsers(string searchParam, int activePage)
+        public List<AppUser> GetNonAdminUsers(out int totalPageCount, string searchParam, int activePage)
         {
-            return _appUserDal.GetNonAdminUsers(searchParam, activePage);
+            return _appUserDal.GetNonAdminUsers(out totalPageCount, searchParam, activePage);
         }
     }
 }

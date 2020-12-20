@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using JobTrackingApp.DataAccess.Concrete.EfCore.Contexts;
 using JobTrackingApp.DataAccess.Interfaces;
@@ -44,7 +45,7 @@ namespace JobTrackingApp.DataAccess.Concrete.EfCore.Repositories
             return users;
         }
         
-        public List<AppUser> GetNonAdminUsers(string searchParam, int activePage = 1)
+        public List<AppUser> GetNonAdminUsers(out int totalPageCount, string searchParam, int activePage = 1)
         {
             using var context = new JobTrackingContext();
             IQueryable<AppUser> users = context.Users.Join(
@@ -76,15 +77,18 @@ namespace JobTrackingApp.DataAccess.Concrete.EfCore.Repositories
                     Picture = u.user.Picture,
                     UserName = u.user.UserName
                 });
-            if (string.IsNullOrWhiteSpace(searchParam))
+
+            totalPageCount = (int)Math.Ceiling((double) users.Count() / 5);
+
+            if (!string.IsNullOrWhiteSpace(searchParam))
             {
-                users.Where(u =>
+                users = users.Where(u =>
                     u.FirstName.ToLower().Contains(searchParam.ToLower()) ||
                     u.SurName.ToLower().Contains(searchParam.ToLower()));
+                totalPageCount = (int)Math.Ceiling((double) users.Count() / 5);
             }
 
             users = users.Skip((activePage - 1) * 5).Take(5);
-            
             return users.ToList();
         }
     }

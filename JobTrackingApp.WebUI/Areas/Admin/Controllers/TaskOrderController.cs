@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using JobTrackingApp.BusinessLogic.Interfaces;
 using JobTrackingApp.Entities.Concrete;
 using JobTrackingApp.WebUI.Areas.Admin.ViewModels;
@@ -49,7 +50,7 @@ namespace JobTrackingApp.WebUI.Areas.Admin.Controllers
         {
             TempData["Active"] = "TaskOrder";
             var task = _taskService.GetByPriority(id);
-            var users = _appUserService.GetNonAdminUsers(searchParam, activePage);
+            var users = _appUserService.GetNonAdminUsers(out var totalPageCount, searchParam, activePage);
             TaskListViewModel taskListViewModel = new TaskListViewModel()
             {
                 Id = task.Id,
@@ -72,11 +73,14 @@ namespace JobTrackingApp.WebUI.Areas.Admin.Controllers
                     Picture = user.Picture
                 });
             });
-            
+            // int totalPageCount = (int) Math.Ceiling((double) _appUserService.GetNonAdminUsers().Count / 5);
             TaskListWithUsersViewModel taskListWithUsersViewModel = new TaskListWithUsersViewModel()
             {
                 TaskListViewModel = taskListViewModel,
-                Users = appUserListViewModels
+                Users = appUserListViewModels,
+                activePage = activePage,
+                totalPageCount = totalPageCount,
+                searchParam = searchParam
             };
             
             return View(taskListWithUsersViewModel);

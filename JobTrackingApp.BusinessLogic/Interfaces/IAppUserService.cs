@@ -6,6 +6,6 @@ namespace JobTrackingApp.BusinessLogic.Interfaces
     public interface IAppUserService
     {
         List<AppUser> GetNonAdminUsers();
-        List<AppUser> GetNonAdminUsers(string searchParam, int activePage);
+        List<AppUser> GetNonAdminUsers(out int totalPageCount, string searchParam, int activePage);
     }
 }

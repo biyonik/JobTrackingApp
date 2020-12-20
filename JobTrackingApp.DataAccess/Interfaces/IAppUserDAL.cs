@@ -6,6 +6,7 @@ namespace JobTrackingApp.DataAccess.Interfaces
     public interface IAppUserDAL
     {
         List<AppUser> GetNonAdminUsers();
-        List<AppUser> GetNonAdminUsers(string searchParam, int activePage);
+        List<AppUser> GetNonAdminUsers(out int totalPageCount, string searchParam, int activePage);
+        
     }
 }
