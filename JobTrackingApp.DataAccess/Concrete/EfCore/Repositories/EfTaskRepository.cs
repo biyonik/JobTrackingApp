@@ -18,5 +18,25 @@ namespace JobTrackingApp.DataAccess.Concrete.EfCore.Repositories
                             .OrderByDescending(task => task.CreatedDate)
                             .ToList();
         }
+
+        public List<Task> GetAllTasksWithRelatedEntities()
+        {
+            using var context = new JobTrackingContext();
+            return context.Tasks
+                .Include(task => task.Priority)
+                .Include(task => task.Reports)
+                .Include(task => task.AppUser)
+                .Where(task => task.Status == false)
+                .OrderByDescending(task => task.CreatedDate)
+                .ToList();
+        }
+
+        public Task GetByPriority(int Id)
+        {
+            using var context = new JobTrackingContext();
+            return context.Tasks
+                .Include(task => task.Priority)
+                .FirstOrDefault(task => task.Status == false);
+        }
     }
 }

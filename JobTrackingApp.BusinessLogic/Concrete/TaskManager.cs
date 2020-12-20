@@ -44,5 +44,15 @@ namespace JobTrackingApp.BusinessLogic.Concrete
         {
             return _taskDal.GetAllIncompleteTasksWithPriority();
         }
+
+        public List<Task> GetAllTasksWithRelatedEntities()
+        {
+            return _taskDal.GetAllTasksWithRelatedEntities();
+        }
+
+        public Task GetByPriority(int Id)
+        {
+            return _taskDal.GetByPriority(Id);
+        }
     }
 }

@@ -7,5 +7,9 @@ namespace JobTrackingApp.BusinessLogic.Interfaces
     public interface ITaskService: IGenericService<Task>
     {
         List<Task> GetAllIncompleteTasksWithPriority();
+
+        List<Task> GetAllTasksWithRelatedEntities();
+
+        Task GetByPriority(int Id);
     }
 }

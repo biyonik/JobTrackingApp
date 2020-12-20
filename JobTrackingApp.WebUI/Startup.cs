@@ -22,10 +22,12 @@ namespace JobTrackingApp.WebUI
             services.AddScoped<ITaskService, TaskManager>();
             services.AddScoped<IPriorityService, PriorityManager>();
             services.AddScoped<IReportService, ReportManager>();
+            services.AddScoped<IAppUserService, AppUserManager>();
             
             services.AddScoped<ITaskDAL, EfTaskRepository>();
             services.AddScoped<IPriorityDAL, EfPriorityRepository>();
             services.AddScoped<IReportDAL, EfReportRepository>();
+            services.AddScoped<IAppUserDAL, EfAppUserRepository>();
             
             services.AddDbContext<JobTrackingContext>();
             services.AddIdentity<AppUser, AppRole>(CustomIdentityOptions.GetIdentityOptions())
